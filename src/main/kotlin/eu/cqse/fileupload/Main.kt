@@ -10,6 +10,7 @@ import java.util.*
 private val programVersion = ResourceBundle.getBundle("eu.cqse.fileupload.app").getString("version")
 private val logger = KotlinLogging.logger {}
 
+/** Entry point */
 fun main(args: Array<String>) {
     mainBody("eu.cqse.fileupload.jar") {
 

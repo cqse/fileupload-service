@@ -7,28 +7,30 @@ import java.io.IOException
 import java.nio.file.Path
 import java.util.concurrent.atomic.AtomicInteger
 
-internal class UploadHandler(private val outputDirectory: Path, private val postUplodHook: (Path) -> Unit) : HttpHandler {
+/** [HttpHandler] that accepts uploads */
+internal class UploadHandler(
+    private val outputDirectory: Path,
+    private val postUploadHook: (Path) -> Unit
+) : HttpHandler {
 
     companion object : KLogging()
 
     private val counter = AtomicInteger(0)
 
+    /** Handles the given upload request. */
     override fun invoke(request: Request): Response {
-        val form = try {
-            MultipartFormBody.from(request)
+        val file = try {
+            MultipartFormBody.from(request).file("file")
         } catch (e: RuntimeException) {
             logger.error(e) { "Invalid multi-part request $request" }
             return Response(Status.BAD_REQUEST)
                 .body("Upload failed. Not a valid multi-part form data request: ${e.message}")
         }
 
-        val file = form.file("file")
         if (file == null) {
             logger.error { "No file provided in request $request in form parameter `file`" }
             return Response(Status.BAD_REQUEST).body("Upload failed. No file provided in form parameter `file`")
         }
-
-        val path = calculateOutputPath(file)
 
         val content = try {
             file.content.use { it.readBytes() }
@@ -37,6 +39,7 @@ internal class UploadHandler(private val outputDirectory: Path, private val post
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to read file from request")
         }
 
+        val path = calculateOutputPath(file)
         try {
             FileSystemUtils.writeFileBinary(path.toFile(), content)
         } catch (e: IOException) {
@@ -44,7 +47,7 @@ internal class UploadHandler(private val outputDirectory: Path, private val post
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to write file to disk")
         }
 
-        postUplodHook(path)
+        postUploadHook(path)
         return Response(Status.OK).body("Upload successful")
     }
 

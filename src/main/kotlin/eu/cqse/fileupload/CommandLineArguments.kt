@@ -6,6 +6,7 @@ import org.conqat.lib.commons.filesystem.FileSystemUtils
 import java.nio.file.Path
 import java.nio.file.Paths
 
+/** Command line arguments for the program. */
 internal class CommandLineArguments(parser: ArgParser) {
 
     val outputDirectory: Path by parser.storing("-o", "--out",

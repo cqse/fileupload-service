@@ -7,6 +7,7 @@ import java.nio.file.Paths
 import java.time.Duration
 import java.util.concurrent.Executors
 
+/** Runs the given command after each upload if it is not null. */
 internal class CommandRunner(command: String?) {
 
     private val commandLine: Array<String> = when (command) {
@@ -27,6 +28,7 @@ internal class CommandRunner(command: String?) {
 
     private val executor = Executors.newSingleThreadExecutor()
 
+    /** Runs the [commandLine] and replaces $F with the actual [path]. */
     fun runAsync(path: Path) {
         executor.submit { run(path) }
     }
