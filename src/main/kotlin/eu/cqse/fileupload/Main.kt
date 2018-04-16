@@ -2,11 +2,23 @@ package eu.cqse.fileupload
 
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.mainBody
+import mu.KotlinLogging
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
+import java.util.*
 
-fun main(args: Array<String>) = mainBody("eu.cqse.fileupload.jar") {
-    ArgParser(args).parseInto(::CommandLineArguments).run {
-        UploadHandler(outputDirectory).asServer(Jetty(port)).start()
+private val programVersion = ResourceBundle.getBundle("eu.cqse.fileupload.app").getString("version")
+private val logger = KotlinLogging.logger {}
+
+fun main(args: Array<String>) {
+    mainBody("eu.cqse.fileupload.jar") {
+
+        ArgParser(args).parseInto(::CommandLineArguments).run {
+            logger.info {
+                "Starting file upload receiver $programVersion on port $port. Writing output to $outputDirectory"
+            }
+
+            UploadHandler(outputDirectory).asServer(Jetty(port)).start()
+        }
     }
 }
