@@ -11,12 +11,18 @@ class UploadHandler(private val outputDirectory: Path) : HttpHandler {
 
     companion object : KLogging()
 
-    private val counter = AtomicInteger(1)
+    private val counter = AtomicInteger(0)
 
     override fun invoke(request: Request): Response {
-        val form = MultipartFormBody.from(request)
-        val file = form.file("file")
+        val form = try {
+            MultipartFormBody.from(request)
+        } catch (e: RuntimeException) {
+            logger.error(e) { "Invalid multi-part request $request" }
+            return Response(Status.BAD_REQUEST)
+                .body("Upload failed. Not a valid multi-part form data request: ${e.message}")
+        }
 
+        val file = form.file("file")
         if (file == null) {
             logger.error { "No file provided in request $request in form parameter `file`" }
             return Response(Status.BAD_REQUEST).body("Upload failed. No file provided in form parameter `file`")
