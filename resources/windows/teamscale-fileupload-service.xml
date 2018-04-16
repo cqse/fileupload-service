@@ -1,0 +1,35 @@
+<service>
+	<id>teamscale-js-proxy</id>
+	<name>Teamscale HTTP File Upload</name>
+	<description>Teamscale HTTP File Upload</description>
+
+	<!-- Adjust these paths to your setup. -->
+	<env name="APP_HOME" value="c:\path\containing\jar" />
+	<env name="JAVA_HOME" value="c:\path\to\java" />
+
+	<env name="PATH" value="%JAVA_HOME%\bin;%PATH%" />
+
+    <!-- Adjust the name of the JAR and set command line options -->
+	<executable>%APP_HOME%\teamscale-fileupload.jar</executable>
+	<arguments></arguments>
+	<workingdirectory>%APP_HOME%</workingdirectory>
+
+	<logmode>rotate</logmode>
+
+	<stoptimeout>60sec</stoptimeout>
+
+	<!-- In case of problems try twice to restart -->
+	<onfailure action="restart" delay="10 sec" />
+	<onfailure action="restart" delay="20 sec" />
+	<onfailure action="none" />
+	<resetfailure>2 hour</resetfailure>
+
+	<!-- Optionally, you can run the service as another user. -->
+	<!--
+		<serviceaccount>
+			<domain>YOURDOMAIN</domain>
+			<user>useraccount</user>
+			<password>Pa55w0rd</password>
+		</serviceaccount>
+	-->
+</service>

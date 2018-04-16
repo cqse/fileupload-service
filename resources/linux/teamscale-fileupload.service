@@ -1,0 +1,18 @@
+[Unit]
+Description=Teamscale HTTP File Upload - allows uploading files via HTTP
+After=network.target
+
+[Service]
+Type=simple
+# TODO adjust this to the Unix user under which the service should run
+# the user must exist and have read/write permissions on the working directory
+User=ubuntu
+# TODO adjust path to the jar and java and add command line arguments
+ExecStart=/usr/bin/java -jar /path/to/teamscale-fileupload.jar
+# TODO set to the path which contains the jar file
+WorkingDirectory=/path/to/jar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

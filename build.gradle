@@ -49,13 +49,55 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+processResources {
+    filesMatching('**/app.properties') {
+        filter {
+            it.replace('%APP_VERSION_TOKEN_REPLACED_DURING_BUILD%', version.toString())
+        }
+    }
+}
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'Teamscale HTTP File Upload',
                 'Implementation-Version': version,
                 'Main-Class': "eu.cqse.fileupload.MainKt"
     }
-    baseName = 'teamscale-js-proxy'
+    baseName = 'teamscale-fileupload'
     // make it a fat jar by including all runtime dependencies
     from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
 }
+
+task doc(type: Exec) {
+    doFirst {
+        mkdir 'build/doc'
+    }
+
+    workingDir 'resources/userguide'
+    commandLine 'pandoc', 'userguide.md', '-o', '../../build/doc/userguide.pdf', '--latex-engine=xelatex',
+            '--toc', '--template=eisvogel.tex', '--listings', '--number-sections'
+}
+
+task prepareDist(dependsOn: [jar, doc], type: Copy) {
+    from('build/libs') {
+        include '*.jar'
+    }
+    from('build/doc') {
+        include '*.pdf'
+    }
+    from('resources') {
+        include 'linux'
+        include 'windows'
+    }
+    from('build/resources/main') {
+        include 'log4*.xml'
+    }
+    into 'build/teamscale-fileupload'
+}
+
+task dist(dependsOn: ['check', prepareDist], type: Zip) {
+    baseName 'teamscale-fileupload'
+    from 'build'
+    include 'teamscale-fileupload/**'
+}
+
