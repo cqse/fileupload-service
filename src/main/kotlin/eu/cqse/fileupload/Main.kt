@@ -18,7 +18,8 @@ fun main(args: Array<String>) {
                 "Starting file upload receiver $programVersion on port $port. Writing output to $outputDirectory"
             }
 
-            UploadHandler(outputDirectory).asServer(Jetty(port)).start()
+            val commandRunner = CommandRunner(commandToRun)
+            UploadHandler(outputDirectory, commandRunner::runAsync).asServer(Jetty(port)).start()
         }
     }
 }

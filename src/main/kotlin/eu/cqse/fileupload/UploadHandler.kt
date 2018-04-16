@@ -7,7 +7,7 @@ import java.io.IOException
 import java.nio.file.Path
 import java.util.concurrent.atomic.AtomicInteger
 
-class UploadHandler(private val outputDirectory: Path) : HttpHandler {
+internal class UploadHandler(private val outputDirectory: Path, private val postUplodHook: (Path) -> Unit) : HttpHandler {
 
     companion object : KLogging()
 
@@ -44,6 +44,7 @@ class UploadHandler(private val outputDirectory: Path) : HttpHandler {
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to write file to disk")
         }
 
+        postUplodHook(path)
         return Response(Status.OK).body("Upload successful")
     }
 
