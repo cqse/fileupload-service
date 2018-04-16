@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eu.cqse.fileupload.iml" filepath="$PROJECT_DIR$/eu.cqse.fileupload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eu.cqse.fileupload_main.iml" filepath="$PROJECT_DIR$/.idea/modules/eu.cqse.fileupload_main.iml" group="eu.cqse.fileupload" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eu.cqse.fileupload_test.iml" filepath="$PROJECT_DIR$/.idea/modules/eu.cqse.fileupload_test.iml" group="eu.cqse.fileupload" />
+    </modules>
+  </component>
+</project>
