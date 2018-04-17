@@ -2,9 +2,9 @@
 title: "Teamscale HTTP File Upload User Guide"
 author: "CQSE GmbH"
 titlepage: true
-titlepage-color: "fd7b34"
-titlepage-rule-color: "ffffff"
-titlepage-text-color: "ffffff"
+titlepage-color: "FD7B34"
+titlepage-rule-color: "FFFFFF"
+titlepage-text-color: "FFFFFF"
 colorlinks: true
 mainfont: "Futura Std"
 monofont: "Bitstream Vera Sans Mono"
