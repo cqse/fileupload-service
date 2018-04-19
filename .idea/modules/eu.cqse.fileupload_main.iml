@@ -40,14 +40,13 @@
     <orderEntry type="library" name="Gradle: org.http4k:http4k-core:3.14.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.31" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.31" level="project" />
-    <orderEntry type="library" name="Gradle: com.xenomachina:kotlin-argparser:2.0.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.ajalt:clikt:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.ant:ant:1.10.3" level="project" />
     <orderEntry type="library" name="Gradle: io.github.microutils:kotlin-logging:1.4.7" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-slf4j-impl:2.10.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.10.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.10.0" level="project" />
     <orderEntry type="library" name="Gradle: org.conqat:org.conqat.lib.commons:0.20160822" level="project" />
-    <orderEntry type="library" name="Gradle: com.xenomachina:xenocom:0.0.7" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.31" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.31" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.7.v20170914" level="project" />

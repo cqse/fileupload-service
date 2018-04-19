@@ -32,7 +32,7 @@ dependencies {
     compile group: "org.http4k", name: "http4k-client-okhttp", version: "3.14.0"
     compile group: "org.http4k", name: "http4k-multipart", version: "3.14.0"
 
-    compile "com.xenomachina:kotlin-argparser:2.0.6"
+    compile 'com.github.ajalt:clikt:1.1.0'
 
     compile 'org.apache.ant:ant:1.10.3'
 
