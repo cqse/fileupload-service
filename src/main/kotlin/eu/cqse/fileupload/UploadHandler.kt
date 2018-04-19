@@ -19,6 +19,8 @@ internal class UploadHandler(
 
     /** Handles the given upload request. */
     override fun invoke(request: Request): Response {
+        logger.debug { "Received upload request $request" }
+
         val file = try {
             MultipartFormBody.from(request).file("file")
         } catch (e: RuntimeException) {
@@ -47,6 +49,7 @@ internal class UploadHandler(
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to write file to disk")
         }
 
+        logger.debug { "Running post upload hook" }
         postUploadHook(path)
         return Response(Status.OK).body("Upload successful")
     }

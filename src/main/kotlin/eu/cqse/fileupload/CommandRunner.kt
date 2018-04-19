@@ -59,7 +59,7 @@ internal class CommandRunner(command: String?) {
         when (result) {
             is ProcessFinished -> {
                 if (result.wasSuccessful) {
-                    logger.info { "Command finished successfully for $path" }
+                    logger.debug { "Command finished successfully for $path" }
                 } else {
                     logger.error {
                         """
