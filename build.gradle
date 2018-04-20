@@ -13,7 +13,7 @@ apply plugin: 'kotlin'
 apply plugin: 'application'
 
 group 'eu.cqse'
-version '1.0.1'
+version '1.0.2'
 
 repositories {
     mavenCentral()
@@ -27,10 +27,10 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    compile group: "org.http4k", name: "http4k-core", version: "3.14.0"
-    compile group: "org.http4k", name: "http4k-server-jetty", version: "3.14.0"
-    compile group: "org.http4k", name: "http4k-client-okhttp", version: "3.14.0"
-    compile group: "org.http4k", name: "http4k-multipart", version: "3.14.0"
+    compile group: "org.http4k", name: "http4k-core", version: "3.24.0"
+    compile group: "org.http4k", name: "http4k-server-jetty", version: "3.24.0"
+    compile group: "org.http4k", name: "http4k-client-okhttp", version: "3.24.0"
+    compile group: "org.http4k", name: "http4k-multipart", version: "3.24.0"
 
     compile 'com.github.ajalt:clikt:1.1.0'
 

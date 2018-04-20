@@ -19,25 +19,25 @@ internal class UploadHandler(
 
     /** Handles the given upload request. */
     override fun invoke(request: Request): Response {
-        logger.debug { "Received upload request $request" }
+        logger.debug { "Received request ${request.method} ${request.uri}" }
 
         val file = try {
             MultipartFormBody.from(request).file("file")
         } catch (e: RuntimeException) {
-            logger.error(e) { "Invalid multi-part request $request" }
+            logger.error(e) { "Invalid multi-part request: ${request.toMessage()}" }
             return Response(Status.BAD_REQUEST)
                 .body("Upload failed. Not a valid multi-part form data request: ${e.message}")
         }
 
         if (file == null) {
-            logger.error { "No file provided in request $request in form parameter `file`" }
+            logger.error { "No file provided in request in form parameter `file`: ${request.toMessage()}" }
             return Response(Status.BAD_REQUEST).body("Upload failed. No file provided in form parameter `file`")
         }
 
         val content = try {
             file.content.use { it.readBytes() }
         } catch (e: IOException) {
-            logger.error(e) { "Failed to read file from request: $request" }
+            logger.error(e) { "Failed to read file from request: ${request.toMessage()}" }
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to read file from request")
         }
 
@@ -49,7 +49,7 @@ internal class UploadHandler(
             return Response(Status.INTERNAL_SERVER_ERROR).body("Upload failed. Failed to write file to disk")
         }
 
-        logger.debug { "Running post upload hook" }
+        logger.debug { "Stored file at `$path`. Running post upload hook" }
         postUploadHook(path)
         return Response(Status.OK).body("Upload successful")
     }
