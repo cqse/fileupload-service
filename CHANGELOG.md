@@ -2,16 +2,21 @@ We use [semantic versioning][semver]
 
 # Next version
 
+# 1.0.3
+
+- [breaking change] $F is now {F} when parsing the post upload command
+- [feature] allow replacement of {F} anywhere in the command
+
 # 1.0.2
 
 - [fix] invalid multipart handling since logger deserializes request before reading content
-- better logging
+- [feature] better logging
 
 # 1.0.1
 
-- add GitLab build
-- additional documentation
-- some more debug logging
+- [maintenance] add GitLab build
+- [feature] additional documentation
+- [feature] some more debug logging
 
 # 1.0.0
 

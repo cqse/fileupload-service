@@ -37,7 +37,7 @@ class Main : CliktCommand() {
 
     val commandToRun: String? by option(
         "-c", "--command",
-        help = "Optional command to run after each upload. \$F will be replaced with the path to the uploaded file."
+        help = "Optional command to run after each upload. {F} will be replaced with the path to the uploaded file."
     )
 
     override fun run() {

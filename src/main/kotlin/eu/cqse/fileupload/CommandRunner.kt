@@ -28,7 +28,7 @@ internal class CommandRunner(command: String?) {
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    /** Runs the [commandLine] and replaces $F with the actual [path]. */
+    /** Runs the [commandLine] and replaces {F} with the actual [path]. */
     fun runAsync(path: Path) {
         executor.submit { run(path) }
     }
@@ -40,12 +40,7 @@ internal class CommandRunner(command: String?) {
 
         logger.info { "Running command for $path" }
 
-        val actualCommandLine = commandLine.map {
-            when (it) {
-                "\$F" -> path.toAbsolutePath().toString()
-                else -> it
-            }
-        }
+        val actualCommandLine = commandLine.map { it.replace("{F}", path.toAbsolutePath().toString()) }
 
         val result = runProcess(
             ProcessSpec(
