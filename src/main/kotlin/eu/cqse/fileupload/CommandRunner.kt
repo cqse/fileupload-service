@@ -28,7 +28,7 @@ internal class CommandRunner(command: String?) {
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    /** Runs the [commandLine] and replaces {F} with the actual [path]. */
+    /** Runs the [commandLine] and replaces `{F}` with the actual [path]. */
     fun runAsync(path: Path) {
         executor.submit { run(path) }
     }
