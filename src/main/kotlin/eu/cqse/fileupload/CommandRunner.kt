@@ -46,7 +46,7 @@ internal class CommandRunner(command: String?) {
             ProcessSpec(
                 commandLine = actualCommandLine.toList(),
                 stdin = "",
-                timeout = Duration.ofSeconds(5),
+                timeout = Duration.ofSeconds(30),
                 workingDirectory = Paths.get("").toAbsolutePath().toFile()
             )
         )
@@ -66,8 +66,17 @@ internal class CommandRunner(command: String?) {
                     }
                 }
             }
-            is ProcessTimedOut -> logger.error { "Command $actualCommandLine timed out for $path" }
+            is ProcessTimedOut -> {
+                logger.error {
+                    """
+                    |Command $actualCommandLine timed out for $path:
+                    |stdout so far = ${result.stdout}
+                    |stderr so far = ${result.stderr}
+                    """.trimMargin()
+                }
+                result.killProcess()
+            }
         }
-    }
 
+    }
 }
