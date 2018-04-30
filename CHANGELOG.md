@@ -2,6 +2,12 @@ We use [semantic versioning][semver]
 
 # Next version
 
+# 1.0.4
+
+- [fix] add stdout/stderr to timeout error message
+- [fix] kill timed out processes
+- [fix] increase timeout from 5s to 30s
+
 # 1.0.3
 
 - [breaking change] $F is now {F} when parsing the post upload command
