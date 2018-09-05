@@ -1,6 +1,15 @@
+# Building
+
+`gradlew assemble`
+
+The result is under `build/distributions`
+
 # Contributing
 
-- Please update the CHANGELOG.md after each change
-- Use merge requests and feature branches
+- Please update the CHANGELOG.md after each change. We use [semantic versioning][semver]
+- Use pull requests and feature branches
 - Every change must be reviewed
-- Tag every release on the master branch
+- Create a GitHub release if you want to release this. We use [semantic versioning][semver]
+
+[semver]: https://semver.org/
+

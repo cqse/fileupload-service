@@ -13,12 +13,12 @@ cache:
   - "$HOME/.gradle/wrapper/"
 deploy:
   provider: releases
-  api_key:
-    secure: iP2O3E7KrVlnw6E0acQ1iz2JEAwzAtMDUXbls14OlrZOz3Sc1Ti1UlF87F8FWaxpTGd2DnMue06XyO4XyTV4ijohWskxDL0BVOgKjqPtjLLB5rIxpVEW7BVM3jUc0gn7xAz2Ds2GI5gqDXBo7o5dGTB34KtaQYNjVejNOt3XfkKvcNSw+cHL9LU/lq0yAFmrKPkxDeUWmm8QmYzuXoGW/KiRcuNWe29Lg0bDoZ2j3DeA5qi8OyeZCa6I9t5rBhzDZa3RsA2XzsuxYGFHNL+jmZbQA62XAq6iP+g+JdpDojgWbzN7E/kbOS1MQcRoKX+3IyHKoOJbAS/nO439kg7s3qagJV+VkWRt2VrgkzWWn1vTUzE0u+NfadPhjtNiy0emNsqowGFdOiDVko0/OckQHDR1s9sxPt2akXcQJ82wPzg78ULdh+hJb/mr8SHcuxD5enV2mxRvxsRBMEJsluMOwg5q5k+EJkA0JOy5ZFF82z2+bA3nlma+Jcx6ymJBqez8SooYEekG7wR2lBHaQ17TamX5SI86k1yGK6hOSiHwmT8Fq50ZRF9kGcz2VR3Rp9WjcA6SN3Vs/t3pBxQUe/HDXzhW0U+aCxNLXmN+XG8IKdeNev0E5UDg1c1P2KVxap+gPxfQetBLuOfPl0KPGZ++bm/ZBkaQ5W2wxCwrUs8uuLQ=
-  skip_cleanup: true
   file_glob: true
   file:
     - build/distributions/fileupload-service-*.zip
+  skip_cleanup: true
+  tags: true
+  api_key:
+    secure: ZvooaLGdAUhgOlcQqDcy7BCkJsswWvHoA9EYv4U4fR45YQYJ+AmSQLl1H3i1+G+XR20PDQeTbg7EaW06e5EOgktTeKmm4u3vWYA4hf/Clc6c54crMRhqfPMmE9Og4bP26oCSrgFlhJW1PAP+trdW4Wa7vra5EfjDEAMmxUpCoFU0i5ZxTriWEBmUGL3OyWMwo/QtQQoUtIEVlthBQM81AekBupzE7mvHqaJOEBUBXZoiKnjLCQUVBWgBp0UNk7Nyr41WgDyhXAPs69tqcOYv7nkIQrlf6R0BtpQaAa0I2B3PCxPAwNn0zlWcpiYx8IhH8TySCuGecsGEoI7gYfNsF61LaXfVfzhJw+ncOzzbXAFV7eI7tKpS8mG/PIhbBrYjF1OEYtttUJS5gyxJP4PLNKyu6rYa8Hpt5Zh9lpFesxEB+THzoBU3FADNgSfDpMC0e/J+EgVaIRI4BGVnAtc/LwMWVcZ+qWCFJiV7UyJCBZtyRcAoMT0TEcHIvjWix2VvuBTDwUgg30uSa4z1wtQdsp+/cNnt4FZ8P0g+AFT7pv2/rswOf3SdPtDmLwO3dATRw5b9Wj0h4ufdlBqpHA+ZAd3u0F0B130FvgKycpw6T2wZ0sC4mWNlU9cOhfj5c3QOeCIpQ/9Rc13Zp7OvvczZHqawDvz58IlmwhkuTrE2Ivg=
   on:
     repo: cqse/fileupload-service
-    tags: true
