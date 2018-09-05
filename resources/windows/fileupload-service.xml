@@ -1,16 +1,16 @@
 <service>
-	<id>teamscale-js-proxy</id>
-	<name>Teamscale HTTP File Upload</name>
-	<description>Teamscale HTTP File Upload</description>
+    <id>fileupload</id>
+	<name>HTTP File Upload</name>
+	<description>HTTP File Upload</description>
 
 	<!-- Adjust these paths to your setup. -->
-	<env name="APP_HOME" value="c:\path\containing\jar" />
+	<env name="APP_HOME" value="c:\path\containing\bin" />
 	<env name="JAVA_HOME" value="c:\path\to\java" />
 
 	<env name="PATH" value="%JAVA_HOME%\bin;%PATH%" />
 
-    <!-- Adjust the name of the JAR and set command line options -->
-	<executable>%APP_HOME%\teamscale-fileupload.jar</executable>
+	<executable>%APP_HOME%\bin\fileupload-service.bat</executable>
+    <!-- Set command line options -->
 	<arguments></arguments>
 	<workingdirectory>%APP_HOME%</workingdirectory>
 

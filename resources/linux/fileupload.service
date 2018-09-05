@@ -1,0 +1,18 @@
+[Unit]
+Description=HTTP File Upload - allows uploading files via HTTP
+After=network.target
+
+[Service]
+Type=simple
+# TODO adjust this to the Unix user under which the service should run
+# the user must exist and have read/write permissions on the working directory
+User=ubuntu
+# TODO adjust path to the bin directory and java and add command line arguments
+ExecStart=/usr/bin/java -jar /path/to/fileupload/bin/fileupload-service
+# TODO set to the path which contains the bin folder
+WorkingDirectory=/path/to/fileupload
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

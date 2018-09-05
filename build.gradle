@@ -88,8 +88,8 @@ distributions {
             from('LICENSE')
 
             from('resources') {
-                include 'linux'
-                include 'windows'
+                include 'linux/**'
+                include 'windows/**'
             }
 
             from('build/resources/main') {
