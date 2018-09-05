@@ -1,4 +1,4 @@
-# Building
+# Building [![Build Status](https://travis-ci.com/cqse/fileupload-service.svg?branch=master)](https://travis-ci.com/cqse/fileupload-service)
 
 `gradlew assemble`
 
