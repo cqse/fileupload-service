@@ -9,6 +9,11 @@ buildscript {
     }
 }
 
+plugins {
+	id 'de.fntsoftware.gradle.markdown-to-pdf' version '1.0.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+}
+
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
@@ -59,15 +64,29 @@ processResources {
     }
 }
 
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Teamscale HTTP File Upload',
-                'Implementation-Version': version,
-                'Main-Class': "eu.cqse.fileupload.MainKt"
-    }
-    baseName = 'teamscale-fileupload'
-    // make it a fat jar by including all runtime dependencies
-    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+mainClassName = 'eu/cqse/fileupload/MainKt'
+shadowJar {
+    baseName = 'fileupload-service'
+	classifier = null
+}
+
+distributions {
+	shadow {
+		baseName = 'fileupload-service'
+		contents {
+			from(userguideToPdf) {
+				into 'documentation'
+			}
+
+            from('LICENSE')
+
+			filesMatching('**/VERSION.txt') {
+				filter {
+					it.replace('%APP_VERSION_TOKEN_REPLACED_DURING_BUILD%', version)
+				}
+			}
+		}
+	}
 }
 
 task doc(type: Exec) {
@@ -94,12 +113,12 @@ task prepareDist(dependsOn: [jar, doc], type: Copy) {
     from('build/resources/main') {
         include 'log4*.xml'
     }
-    into 'build/teamscale-fileupload'
+    into 'build/fileupload-service'
 }
 
 task dist(dependsOn: ['check', prepareDist], type: Zip) {
-    baseName 'teamscale-fileupload'
+    baseName 'fileupload-service'
     from 'build'
-    include 'teamscale-fileupload/**'
+    include 'fileupload-service/**'
 }
 
