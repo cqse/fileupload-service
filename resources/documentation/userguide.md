@@ -1,16 +1,3 @@
----
-title: "Teamscale HTTP File Upload User Guide"
-author: "CQSE GmbH"
-titlepage: true
-titlepage-color: "FD7B34"
-titlepage-rule-color: "FFFFFF"
-titlepage-text-color: "FFFFFF"
-colorlinks: true
-mainfont: "Futura Std"
-monofont: "Bitstream Vera Sans Mono"
-mathspec: true
----
-
 # Teamscale HTTP File Upload
 
 Accepts HTTP connections on a port. If a multi-part form data request

@@ -17,6 +17,8 @@ plugins {
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
+import de.fntsoftware.gradle.MarkdownToPdfTask;
+
 group 'eu.cqse'
 version '1.0.4'
 
@@ -64,6 +66,11 @@ processResources {
     }
 }
 
+task userguideToPdf(type: MarkdownToPdfTask) {
+    inputFile = 'resources/documentation/userguide.md'
+    outputFile = 'build/documentation/userguide.pdf'
+}
+
 mainClassName = 'eu/cqse/fileupload/MainKt'
 shadowJar {
     baseName = 'fileupload-service'
@@ -80,6 +87,15 @@ distributions {
 
             from('LICENSE')
 
+            from('resources') {
+                include 'linux'
+                include 'windows'
+            }
+
+            from('build/resources/main') {
+                include 'log4*.xml'
+            }
+
 			filesMatching('**/VERSION.txt') {
 				filter {
 					it.replace('%APP_VERSION_TOKEN_REPLACED_DURING_BUILD%', version)
@@ -87,38 +103,5 @@ distributions {
 			}
 		}
 	}
-}
-
-task doc(type: Exec) {
-    doFirst {
-        mkdir 'build/doc'
-    }
-
-    workingDir 'resources/userguide'
-    commandLine 'pandoc', 'userguide.md', '-o', '../../build/doc/userguide.pdf', '--latex-engine=xelatex',
-            '--toc', '--template=eisvogel.tex', '--listings', '--number-sections'
-}
-
-task prepareDist(dependsOn: [jar, doc], type: Copy) {
-    from('build/libs') {
-        include '*.jar'
-    }
-    from('build/doc') {
-        include '*.pdf'
-    }
-    from('resources') {
-        include 'linux'
-        include 'windows'
-    }
-    from('build/resources/main') {
-        include 'log4*.xml'
-    }
-    into 'build/fileupload-service'
-}
-
-task dist(dependsOn: ['check', prepareDist], type: Zip) {
-    baseName 'fileupload-service'
-    from 'build'
-    include 'fileupload-service/**'
 }
 
